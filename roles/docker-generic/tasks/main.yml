@@ -1,0 +1,59 @@
+---
+# tasks file for docker-plex
+
+- name: Create directories for {{ docker_name }} if they do not exist. 
+  file:
+    path: "{{ docker_volumes }}"
+    state: directory
+    mode: 0777
+  when: docker_volumes is defined
+    
+- name: Set Docker container parameters for {{ docker_name }} with published ports and volumes.
+  set_fact:
+    container_parameters:
+      name: "{{ docker_name }}"
+      image: "{{ docker_image }}"
+      state: started
+      published_ports: "{{ docker_ports }}"
+      volumes: "{{ docker_volumes }}"
+      env: "{{ docker_environment_variables }}"
+  when: docker_volumes is defined and docker_ports is defined
+
+- name: Set Docker container parameters for {{ docker_name }} with published ports ONLY.
+  set_fact:
+    container_parameters:
+      name: "{{ docker_name }}"
+      image: "{{ docker_image }}"
+      state: started
+      published_ports: "{{ docker_ports }}"
+      env: "{{ docker_environment_variables }}"
+  when: docker_volumes is not defined and docker_ports is defined
+
+- name: Set Docker container parameters for {{ docker_name }} with volumes ONLY.
+  set_fact:
+    container_parameters:
+      name: "{{ docker_name }}"
+      image: "{{ docker_image }}"
+      state: started
+      volumes: "{{ docker_volumes }}"
+      env: "{{ docker_environment_variables }}"
+  when: docker_volumes is defined and docker_ports is not defined
+
+- name: Set Docker container parameters for {{ docker_name }} with NEITHER published ports NOR volumes.
+  set_fact:
+    container_parameters:
+      name: "{{ docker_name }}"
+      image: "{{ docker_image }}"
+      state: started
+      env: "{{ docker_environment_variables }}"
+  when: docker_volumes is not defined and docker_ports is not defined
+
+- name: Create {{ docker_name }} container.
+  docker_container: "{{ container_parameters | combine(docker_additional_options) }}"
+  register: new_container
+
+- name: Wait for {{ docker_name }} start.
+  wait_for:
+    port: "{{ docker_ports[0].split(':')[0] }}"
+    host: "{{ new_container.container.NetworkSettings.IPAddress }}"
+  when: docker_ports is defined
