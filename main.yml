@@ -1,5 +1,5 @@
 ---
-# This playbook deploys a Plex docker container on a docker host.
+# This playbook deploys a docker container on a docker host.
 
 - name: Deploy the new Container.
   hosts: docker
