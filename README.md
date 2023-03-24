@@ -60,10 +60,10 @@ None.
 
 ### License
 
-BSD
+MIT
 
 ### Author Information
 
-Derek Smiley - Network Analyst & Avid Homelabber
+Derek Smiley - Network Analyst, avid homelabber, and aspiring Systems Administrator.
 
 Connect with me on LinkedIn - https://www.linkedin.com/in/derek-smiley/
