@@ -17,8 +17,7 @@
       published_ports: "{{ docker_ports }}"
       volumes: "{{ docker_volumes }}"
       env: "{{ docker_environment_variables }}"
-      labels:
-        - "com.centurylinklabs.watchtower.enable={{ watchtower_update }}"
+      labels: "{{ docker_labels }}"
   when: docker_volumes is defined and docker_ports is defined
 
 - name: Set Docker container parameters for {{ docker_name }} with published ports ONLY.
@@ -29,8 +28,7 @@
       state: started
       published_ports: "{{ docker_ports }}"
       env: "{{ docker_environment_variables }}"
-      labels:
-        - "com.centurylinklabs.watchtower.enable={{ watchtower_update }}"
+      labels: "{{ docker_labels }}"
   when: docker_volumes is not defined and docker_ports is defined
 
 - name: Set Docker container parameters for {{ docker_name }} with volumes ONLY.
@@ -41,8 +39,7 @@
       state: started
       volumes: "{{ docker_volumes }}"
       env: "{{ docker_environment_variables }}"
-      labels:
-        - "com.centurylinklabs.watchtower.enable={{ watchtower_update }}"
+      labels: "{{ docker_labels }}"
   when: docker_volumes is defined and docker_ports is not defined
 
 - name: Set Docker container parameters for {{ docker_name }} with NEITHER published ports NOR volumes.
@@ -52,8 +49,7 @@
       image: "{{ docker_image }}"
       state: started
       env: "{{ docker_environment_variables }}"
-      labels:
-        - "com.centurylinklabs.watchtower.enable={{ watchtower_update }}"
+      labels: "{{ docker_labels }}"
   when: docker_volumes is not defined and docker_ports is not defined
 
 - name: Create {{ docker_name }} container.
