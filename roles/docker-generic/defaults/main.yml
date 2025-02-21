@@ -3,13 +3,7 @@
 
 docker_name: Hello-World
 docker_image: hello-world
-#docker_network_mode: host
-#docker_ports:
-#- 32400:32400
 
-#docker_config_directory: /opt/  docker
-#docker_movie_directory: /mnt/media/movies
-#docker_tv_directory: /mnt/media/tv                                                                       
 docker_environment_variables:
   PUID: "1000"
   PGID: "1000"
@@ -18,3 +12,5 @@ docker_environment_variables:
 
 docker_additional_options:
   restart_policy: unless-stopped
+
+watchtower_update: true
