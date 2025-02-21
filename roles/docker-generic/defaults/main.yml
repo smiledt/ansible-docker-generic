@@ -16,4 +16,4 @@ docker_additional_options:
   restart_policy: unless-stopped
 
 docker_labels:
-  com.centurylinklabs.watchtower.enable: {{ watchtower_update }}
+  com.centurylinklabs.watchtower.enable: true
