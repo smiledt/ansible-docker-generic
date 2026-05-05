@@ -17,7 +17,7 @@ galaxy_info:
   # - CC-BY-4.0
   license: MIT
 
-  min_ansible_version: 2.4
+  min_ansible_version: "2.4"
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -29,10 +29,14 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-  - name: Ubuntu
-    versions:
-    - 20.04
-    - 22.04
+    - name: Ubuntu
+      versions:
+        - "jammy"
+        - "noble"
+    - name: Debian
+      versions:
+        - "bookworm"
+        - "trixie"
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes

@@ -4,8 +4,6 @@
 docker_name: Hello-World
 docker_image: hello-world
 
-watchtower_update: true
-
 docker_environment_variables:
   PUID: "1000"
   PGID: "1000"
@@ -14,6 +12,3 @@ docker_environment_variables:
 
 docker_additional_options:
   restart_policy: unless-stopped
-
-docker_labels:
-  com.centurylinklabs.watchtower.enable: "true"
