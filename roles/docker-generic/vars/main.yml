@@ -1,0 +1,22 @@
+---
+# vars file for docker-generic
+
+docker_name: Tautulli
+docker_image: linuxserver/tautulli
+docker_environment_variables:
+  PUID: "1099"
+  PGID: "1099"
+  VERSION: latest
+  TZ: America/Chicago
+
+docker_volumes:
+  - "/opt/tautulli:/config"
+  - "/opt/plex/Library/Application Support/Plex Media Server/Logs:/plexlogs"
+  - "/opt/test:/test"
+
+docker_ports:
+  - 8181:8181
+  - 1818:1818
+
+docker_additional_options:
+  restart_policy: unless-stopped
